@@ -1,437 +1,223 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galiyev.com | Разработка программного обеспечения и запуск MVP</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #2d3142;
-            --accent-color: #4f5d75;
-            --highlight-color: #ef8354;
-            --light-color: #f5f5f5;
-            --transition: all 0.3s ease;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--primary-color);
-            background-color: var(--light-color);
-            line-height: 1.6;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        
-        /* Header */
-        header {
-            padding: 2rem 0;
-            position: relative;
-        }
-        
-        .logo {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            text-decoration: none;
-            display: inline-block;
-            position: relative;
-        }
-        
-        .logo:after {
-            content: '';
-            position: absolute;
-            width: 50%;
-            height: 3px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--highlight-color);
-            transition: var(--transition);
-        }
-        
-        .logo:hover:after {
-            width: 100%;
-        }
-        
-        /* Hero Section */
-        .hero {
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero:before {
-            content: '';
-            position: absolute;
-            top: -10%;
-            right: -10%;
-            width: 50%;
-            height: 70%;
-            background: var(--accent-color);
-            opacity: 0.05;
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            z-index: -1;
-        }
-        
-        .hero:after {
-            content: '';
-            position: absolute;
-            bottom: -10%;
-            left: -10%;
-            width: 60%;
-            height: 60%;
-            background: var(--highlight-color);
-            opacity: 0.05;
-            border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
-            z-index: -1;
-        }
-        
-        .hero-content {
-            max-width: 800px;
-        }
-        
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-        
-        .hero-title span {
-            color: var(--highlight-color);
-        }
-        
-        .hero-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            font-weight: 300;
-        }
-        
-        /* Services */
-        .services {
-            padding: 5rem 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 3rem;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-title:after {
-            content: '';
-            position: absolute;
-            width: 100px;
-            height: 3px;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: var(--highlight-color);
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .service-card {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .service-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            background-color: var(--highlight-color);
-            transition: var(--transition);
-            z-index: -1;
-        }
-        
-        .service-card:hover:before {
-            width: 100%;
-            opacity: 0.05;
-        }
-        
-        .service-title {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .service-description {
-            color: var(--accent-color);
-        }
-        
-        /* Contact */
-        .contact {
-            padding: 5rem 0;
-            background-color: white;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .contact:before {
-            content: '';
-            position: absolute;
-            top: -10%;
-            left: -10%;
-            width: 40%;
-            height: 40%;
-            background: var(--highlight-color);
-            opacity: 0.05;
-            border-radius: 50%;
-            z-index: 0;
-        }
-        
-        .contact-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .contact-title {
-            margin-bottom: 2rem;
-        }
-        
-        .contact-info {
-            margin-bottom: 2rem;
-        }
-        
-        .contact-method {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-        }
-        
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--light-color);
-            border-radius: 50%;
-            margin-right: 1rem;
-            transition: var(--transition);
-        }
-        
-        .contact-method:hover .contact-icon {
-            background-color: var(--highlight-color);
-            color: white;
-        }
-        
-        .contact-text {
-            font-size: 1.2rem;
-        }
-        
-        .contact-text a {
-            color: var(--primary-color);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        
-        .contact-text a:hover {
-            color: var(--highlight-color);
-        }
-        
-        /* Footer */
-        footer {
-            padding: 2rem 0;
-            text-align: center;
-            background-color: var(--primary-color);
-            color: white;
-        }
-        
-        .footer-text {
-            opacity: 0.8;
-        }
-        
-        /* Animation */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .animate {
-            animation: fadeIn 1s ease forwards;
-        }
-        
-        .delay-1 {
-            animation-delay: 0.2s;
-        }
-        
-        .delay-2 {
-            animation-delay: 0.4s;
-        }
-        
-        .delay-3 {
-            animation-delay: 0.6s;
-        }
-        
-        /* Media Queries */
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.2rem;
-            }
-            
-            .hero {
-                height: auto;
-                padding: 4rem 0;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Industry.kz — казахстанский B2B-маркетплейс. Производители KZ → экспорт в СНГ и Китай. Запуск в январе 2026." />
+  <meta name="keywords" content="Industry.kz, B2B Казахстан, экспорт, маркетплейс, поставщики KZ" />
+  <meta name="author" content="Industry.kz" />
+  <title>Industry.kz — Скоро запуск</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇰🇿</text></svg>">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0033A0 0%, #0052D4 100%);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .logo {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+    }
+
+    .tagline {
+      font-size: 1.4rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      line-height: 1.5;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 2.5rem 0;
+      flex-wrap: wrap;
+    }
+
+    .time-block {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 1rem 1.5rem;
+      min-width: 90px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .time-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .time-label {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 0.5rem;
+      opacity: 0.8;
+    }
+
+    .notify {
+      margin-top: 2.5rem;
+    }
+
+    .notify input {
+      padding: 14px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 12px 0 0 12px;
+      width: 260px;
+      max-width: 100%;
+    }
+
+    .notify button {
+      padding: 14px 24px;
+      font-size: 1rem;
+      background: #FFD700;
+      color: #0033A0;
+      border: none;
+      border-radius: 0 12px 12px 0;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .notify button:hover {
+      background: #FFC107;
+    }
+
+    .social {
+      margin-top: 3rem;
+      font-size: 1.5rem;
+    }
+
+    .social a {
+      color: white;
+      margin: 0 12px;
+      opacity: 0.7;
+      transition: 0.3s;
+    }
+
+    .social a:hover {
+      opacity: 1;
+      transform: translateY(-3px);
+    }
+
+    footer {
+      margin-top: 4rem;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    @media (max-width: 600px) {
+      .logo { font-size: 2.5rem; }
+      .tagline { font-size: 1.2rem; }
+      .time-number { font-size: 2rem; }
+      .notify input { width: 100%; border-radius: 12px; margin-bottom: 1rem; }
+      .notify button { width: 100%; border-radius: 12px; }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <a href="#" class="logo">Galiyev.com</a>
-        </div>
-    </header>
-    
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title animate">Разработка <span>программного обеспечения</span> и запуск <span>MVP</span></h1>
-                <p class="hero-subtitle animate delay-1">Превращаем идеи в инновационные цифровые решения</p>
-            </div>
-        </div>
-    </section>
-    
-    <section class="services">
-        <div class="container">
-            <h2 class="section-title">Наши услуги</h2>
-            <div class="services-grid">
-                <div class="service-card animate delay-1">
-                    <h3 class="service-title">Разработка программного обеспечения</h3>
-                    <p class="service-description">Создаем надежные, масштабируемые и высокопроизводительные решения, отвечающие вашим бизнес-целям.</p>
-                </div>
-                <div class="service-card animate delay-2">
-                    <h3 class="service-title">Запуск MVP</h3>
-                    <p class="service-description">Быстро воплощаем вашу идею в минимально жизнеспособный продукт для проверки концепции и привлечения первых пользователей.</p>
-                </div>
-                <div class="service-card animate delay-3">
-                    <h3 class="service-title">Техническая консультация</h3>
-                    <p class="service-description">Помогаем выбрать оптимальные технологии и разработать стратегию развития вашего цифрового продукта.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section class="contact">
-        <div class="container">
-            <div class="contact-content">
-                <h2 class="section-title contact-title">Свяжитесь с нами</h2>
-                <div class="contact-info">
-                    <div class="contact-method">
-                        <div class="contact-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                            </svg>
-                        </div>
-                        <div class="contact-text">
-                            <a href="tel:+77012216798">+7 701 221 67 98</a>
-                        </div>
-                    </div>
-                    <div class="contact-method">
-                        <div class="contact-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                                <polyline points="22,6 12,13 2,6"></polyline>
-                            </svg>
-                        </div>
-                        <div class="contact-text">
-                            <a href="mailto:galiyev@gmail.com">galiyev@gmail.com</a>
-                        </div>
-                    </div>
-                    <div class="contact-method">
-                        <div class="contact-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <line x1="12" y1="2" x2="12" y2="6"></line>
-                                <line x1="12" y1="18" x2="12" y2="22"></line>
-                                <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
-                                <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
-                                <line x1="2" y1="12" x2="6" y2="12"></line>
-                                <line x1="18" y1="12" x2="22" y2="12"></line>
-                                <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
-                                <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
-                            </svg>
-                        </div>
-                        <div class="contact-text">
-                            <a href="https://t.me/astanasoftdev">Telegram: @astanasoftdev</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <footer>
-        <div class="container">
-            <p class="footer-text">© 2025 Galiyev.com Все права защищены.</p>
-        </div>
-    </footer>
 
-    <script>
-        // Simple animation on scroll
-        document.addEventListener('DOMContentLoaded', () => {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate');
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            document.querySelectorAll('.service-card').forEach(card => {
-                observer.observe(card);
-            });
-        });
-    </script>
+  <div class="container">
+    <h1 class="logo">Industry.kz 🇰🇿</h1>
+    <p class="tagline">
+      Казахстанский B2B-маркетплейс<br>
+      Производители KZ → покупатели из СНГ и Китая
+    </p>
+
+    <div class="countdown" id="countdown">
+      <div class="time-block">
+        <div class="time-number" id="days">00</div>
+        <div class="time-label">Дней</div>
+      </div>
+      <div class="time-block">
+        <div class="time-number" id="hours">00</div>
+        <div class="time-label">Часов</div>
+      </div>
+      <div class="time-block">
+        <div class="time-number" id="minutes">00</div>
+        <div class="time-label">Минут</div>
+      </div>
+      <div class="time-block">
+        <div class="time-number" id="seconds">00</div>
+        <div class="time-label">Секунд</div>
+      </div>
+    </div>
+
+    <div class="notify">
+      <form onsubmit="alert('Спасибо! Уведомим о запуске.'); return false;">
+        <input type="email" placeholder="Ваш email для уведомления" required />
+        <button type="submit">Узнать первым</button>
+      </form>
+    </div>
+
+    <div class="social">
+      <a href="https://t.me/industry_kz" target="_blank">Telegram</a>
+      <a href="https://x.com/industry_kz" target="_blank">X (Twitter)</a>
+      <a href="https://instagram.com/industry.kz" target="_blank">Instagram</a>
+    </div>
+
+    <footer>
+      &copy; 2025 Industry.kz — Все права защищены
+    </footer>
+  </div>
+
+  <script>
+    // УКАЖИ СВОЮ ДАТУ ЗАПУСКА ЗДЕСЬ
+    const launchDate = new Date('2026-01-01T00:00:00');
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = launchDate - now;
+
+      if (diff <= 0) {
+        document.getElementById('countdown').innerHTML = '<p style="font-size:1.5rem;">🚀 Мы запущены!</p>';
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('days').textContent = days.toString().padStart(2, '0');
+      document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+      document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+      document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    }
+
+    // Обновляем сразу и каждую секунду
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
 </body>
 </html>
